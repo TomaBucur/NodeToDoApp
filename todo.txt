@@ -1,0 +1,5 @@
+mailul se salveaza in baza de date doar cu litere mici
+
+la inregistrare, confirmarea parolei nu merge, desi codul e bun, are un bug in spate
+
+/
