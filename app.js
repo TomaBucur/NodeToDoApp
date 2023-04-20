@@ -24,7 +24,7 @@ app.get('/test', (request, response) => {
 })
 
 app.get('/', (request, response) => {
-
+    response.json({success:true, message: 'Welcome to the backend'})
 })
 
 app.listen(8000, () => {
