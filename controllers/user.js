@@ -1,4 +1,4 @@
-
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
 exports.createUser =  async (request, response) => {
@@ -13,5 +13,18 @@ exports.createUser =  async (request, response) => {
     await user.save();
 
     response.json(user)
+}
+
+exports.userSignIn = async (request, response) => {
+    const {email, password} = request.body;
+    const user = await User.findOne({email})
+    if(!user) return response.json({success: false, message: 'user not found' })
+
+    const isMatching = await user.comparePassword(password)
+    if(!isMatching) return response.json({success: false, message: "password didn't match"})
+
+    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET,{expiresIn: '1d'})
+
+    return response.json({success: true, user, token})
 }
 
