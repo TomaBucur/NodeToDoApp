@@ -9,6 +9,7 @@ const app = express();
 const User = require('./models/user')
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 app.use(userRouter);
 
 const test = async (email, password)=> {
